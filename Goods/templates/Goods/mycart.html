@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}My Cart{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">My Shopping Cart</h1>
+    {% if cart.cartproduct_set.all %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.cartproduct_set.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.product.price }}</td>
+                    <td>${{ item.product.price }}</td>
+                    <td>${{ item.quantity }}</td>
+                    <td>
+                        <a href="{% url 'subtract_from_cart' %}?code={{ item.product.generate_code }}&quantity=1" class="btn btn-warning btn-sm">-</a>
+                        <a href="{% url 'add_to_cart' %}?code={{ item.product.generate_code }}&quantity=1" class="btn btn-success btn-sm">+</a>
+                        <a href="{% url 'delete_from_cart' %}?code={{ item.product.generate_code }}" class="btn btn-danger btn-sm">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><strong>Total:</strong></td>
+                    <td colspan="2"><strong>${{ cart.total_price }}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+        <a href="{% url 'create_order' %}?generate_code={{ cart.generate_code }}" class="btn btn-primary">Proceed to Checkout</a>
+    {% else %}
+        <p>Your cart is empty. <a href="{% url 'index' %}">Continue shopping</a></p>
+    {% endif %}
+</div>
+{% endblock %}

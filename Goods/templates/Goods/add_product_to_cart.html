@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Mahsulotni savatga qo'shish{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Mahsulotni savatga qo'shish</h3>
+                </div>
+                <div class="card-body">
+                    <form method="GET" action="{% url 'addproducttocart' %}">
+                        <div class="form-group mb-3">
+                            <label for="code" class="form-label">Mahsulot kodi:</label>
+                            <input type="text" class="form-control" id="code" name="code" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="quantity" class="form-label">Miqdori:</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" min="1" value="1" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Savatga qo'shish</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

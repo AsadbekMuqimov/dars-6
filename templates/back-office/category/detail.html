@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Kategoriya tafsilotlari{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">{{ queryset.name }}</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Kategoriya nomi:</strong> {{ queryset.name }}</p>
+                    <!-- Agar kategoriyada boshqa ma'lumotlar bo'lsa, bu yerga qo'shish mumkin -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-8 mx-auto">
+            <h4>Ushbu kategoriyaga tegishli mahsulotlar:</h4>
+            <ul class="list-group">
+                {% for product in queryset.product_set.all %}
+                <li class="list-group-item">
+                    <a href="{% url 'detailProduct' product.id %}">{{ product.name }}</a>
+                </li>
+                {% empty %}
+                <li class="list-group-item">Bu kategoriyada hozircha mahsulotlar yo'q.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Mahsulot tafsilotlari{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">{{ queryset.name }}</h3>
+                </div>
+                <div class="card-body">
+                    <p><strong>Kategoriya:</strong> {{ queryset.category.name }}</p>
+                    <p><strong>Miqdori:</strong> {{ queryset.quantity }}</p>
+                    <p><strong>Tavsif:</strong> {{ queryset.description }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0">Mahsulot rasmlari</h4>
+                </div>
+                <div class="card-body">
+                    {% for image in images %}
+                    <img src="{{ image.img.url }}" alt="{{ queryset.name }}" class="img-fluid mb-3" style="max-width: 100%;">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
